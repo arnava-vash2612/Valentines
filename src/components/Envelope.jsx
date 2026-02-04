@@ -14,22 +14,18 @@ export default function Envelope() {
     const celebrate = (e) => {
         e.stopPropagation();
 
-        // Updated Confetti Config
+        // FORCE Z-INDEX TO 9999
         confetti({
             particleCount: 150,
             spread: 70,
             origin: { y: 0.6 },
-            zIndex: 9999, // <--- ADD THIS LINE to force it on top of everything
+            zIndex: 9999
         });
 
-        // Haptics
-        if (navigator.vibrate) {
-            navigator.vibrate([100, 100, 100, 800, 100, 100, 100, 800]);
-        }
-
+        // Haptics & Ticket
+        if (navigator.vibrate) navigator.vibrate([100, 100, 100]);
         setShowTicket(true);
     };
-
     return (
         <div className={`envelope-wrapper ${isOpen ? 'open' : ''}`} onClick={handleOpen}>
 

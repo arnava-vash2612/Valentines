@@ -302,13 +302,52 @@ p {
   border-radius: 0 0 10px 10px;
 }
 
-/* Find this block in App.css */
+/* --- FIXED LETTER STYLES --- */
 .letter {
-  /* ... keep other settings ... */
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  width: 300px;
+  height: 180px;
+  /* FORCE WHITE BACKGROUND */
+  background: #fffdf7 !important;
+  background-color: #fffdf7 !important;
+  z-index: 10;
+  transition: all 1s ease-in-out;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
-  /* CHANGED from hidden to auto */
-  scrollbar-width: none;
-  /* For Firefox - hides scrollbar */
+  /* Allows scrolling if text is long */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Force all text inside the letter to be DARK GREY (Not Cyan/White) */
+.letter p,
+.letter h1,
+.letter h2,
+.letter h3,
+.letter span {
+  color: #333 !important;
+  font-family: 'Dancing Script', cursive !important;
+  text-shadow: none !important;
+}
+
+/* Fix the Boarding Pass Text */
+.letter .ticket-body,
+.letter .ticket-header {
+  font-family: 'Courier New', monospace !important;
+}
+
+/* Ensure the open state lifts the letter high enough */
+.envelope-wrapper.open .letter {
+  bottom: 50px;
+  height: 450px;
+  /* Tall enough to see everything */
+  z-index: 20;
 }
 
 /* Add this to hide scrollbar on Chrome/Safari/Edge */
