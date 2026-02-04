@@ -21,7 +21,7 @@ body {
   align-items: center;
 }
 
-/* --- 1. NEBULA BACKGROUND --- */
+/* --- 1. OPTIMIZED BACKGROUND (Nebula) --- */
 .app-container {
   position: relative;
   width: 100%;
@@ -29,7 +29,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Deep Space Gradient */
   background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #000000 100%);
   z-index: 1;
 }
@@ -37,9 +36,13 @@ body {
 .orb {
   position: absolute;
   border-radius: 50%;
+  /* Reduced blur for better performance */
   filter: blur(60px);
   opacity: 0.4;
   z-index: -1;
+  /* Hardware Acceleration */
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
   animation: float 10s infinite ease-in-out;
 }
 
@@ -72,7 +75,7 @@ body {
   }
 }
 
-/* --- 2. BIOMETRIC SCANNER (OPENING) --- */
+/* --- 2. BIOMETRIC SCANNER (Opening Screen) --- */
 .scanner-container {
   display: flex;
   flex-direction: column;
@@ -103,7 +106,6 @@ body {
 
 .fingerprint-icon {
   font-size: 3.5rem;
-  /* Makes the lightning bolt look like it's scanning */
   background: linear-gradient(to bottom, #00d2ff 0%, #ffffff 50%, #00d2ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -154,7 +156,7 @@ body {
   }
 }
 
-/* --- 3. JOURNEY CARD (CINEMA MODE) --- */
+/* --- 3. JOURNEY CARD (Cinema Mode) --- */
 .journey-container {
   width: 90%;
   max-width: 500px;
@@ -172,30 +174,29 @@ body {
   position: relative;
 }
 
-/* THE FIX FOR GRAINY IMAGES */
+/* Image Frame Fixes */
 .frame {
   width: 100%;
   height: 350px;
-  /* Tall frame */
   margin: 20px 0;
   background: rgba(0, 0, 0, 0.5);
-  /* Dark background */
+  /* Dark background for letterboxing */
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
-  /* Inner shadow for depth */
   position: relative;
 }
 
 .frame img {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  /* CRITICAL: Ensures full image is seen, no cropping */
+  /* Prevents cropping */
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+  transform: scale(0.95);
 }
 
 .floating-icon {
@@ -210,9 +211,33 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Typography */
+/* Download Button Style */
+.download-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: 10;
+}
+
+.download-btn:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+/* Text Styles */
 h1 {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   margin: 10px 0;
   min-height: 4rem;
   display: flex;
@@ -222,7 +247,7 @@ h1 {
 
 p {
   color: #a1a1aa;
-  font-size: 1rem;
+  font-size: 0.95rem;
   margin-bottom: 20px;
 }
 
@@ -255,7 +280,8 @@ p {
   transform: scale(1.02);
 }
 
-/* --- 4. ENVELOPE STYLES (Restored) --- */
+/* --- 4. ENVELOPE SYSTEM (The Corrected Version) --- */
+
 .envelope-wrapper {
   display: flex;
   justify-content: center;
@@ -268,51 +294,54 @@ p {
 
 .envelope {
   position: relative;
-  width: 320px;
-  height: 220px;
+  width: 300px;
+  height: 200px;
   background: #ff4d6d;
   border-radius: 0 0 10px 10px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
+/* 1. THE FLAP (Top Triangle) - On TOP when closed */
 .flap {
   position: absolute;
   top: 0;
   left: 0;
   width: 0;
   height: 0;
-  border-left: 160px solid transparent;
-  border-right: 160px solid transparent;
-  border-top: 120px solid #e01e4a;
+  border-left: 150px solid transparent;
+  border-right: 150px solid transparent;
+  border-top: 110px solid #e01e4a;
   transform-origin: top;
   transition: transform 0.6s ease-in-out;
-  z-index: 5;
+  z-index: 20;
 }
 
+/* 2. THE POCKET (Bottom Triangle) */
 .pocket {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 0;
   height: 0;
-  border-left: 160px solid transparent;
-  border-right: 160px solid transparent;
-  border-bottom: 210px solid #ff758f;
-  z-index: 4;
+  border-left: 150px solid transparent;
+  border-right: 150px solid transparent;
+  border-bottom: 190px solid #ff758f;
+  z-index: 10;
   border-radius: 0 0 10px 10px;
 }
 
-/* --- FIXED LETTER STYLES --- */
+/* 3. THE LETTER (Hidden inside initially) */
 .letter {
   position: absolute;
   bottom: 0;
   left: 10px;
-  width: 300px;
+  width: 280px;
   height: 180px;
-  /* FORCE WHITE BACKGROUND */
   background: #fffdf7 !important;
+  /* Forces White Paper */
   background-color: #fffdf7 !important;
-  z-index: 10;
+  z-index: 5;
+  /* Hidden behind flap */
   transition: all 1s ease-in-out;
   padding: 20px;
   box-sizing: border-box;
@@ -321,70 +350,51 @@ p {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  /* Allows scrolling if text is long */
+  /* Allow scrolling */
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Force all text inside the letter to be DARK GREY (Not Cyan/White) */
+/* Hide scrollbar */
+.letter::-webkit-scrollbar {
+  display: none;
+}
+
+.letter {
+  scrollbar-width: none;
+}
+
+/* Letter Text Styles */
 .letter p,
 .letter h1,
 .letter h2,
 .letter h3,
 .letter span {
   color: #333 !important;
+  /* Force Dark Grey Text */
   font-family: 'Dancing Script', cursive !important;
   text-shadow: none !important;
 }
 
-/* Fix the Boarding Pass Text */
 .letter .ticket-body,
 .letter .ticket-header {
   font-family: 'Courier New', monospace !important;
 }
 
-/* Ensure the open state lifts the letter high enough */
-.envelope-wrapper.open .letter {
-  bottom: 50px;
-  height: 450px;
-  /* Tall enough to see everything */
-  z-index: 20;
-}
+/* --- OPEN STATE ANIMATIONS --- */
 
-/* Add this to hide scrollbar on Chrome/Safari/Edge */
-.letter::-webkit-scrollbar {
-  display: none;
-}
-
-/* OPEN ANIMATION */
 .envelope-wrapper.open .flap {
   transform: rotateX(180deg);
   z-index: 1;
+  /* Drops to back */
 }
 
 .envelope-wrapper.open .letter {
   bottom: 50px;
-  height: 500px;
-  /* Increase this if it was 400px or 450px */
-  z-index: 10;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-}
-
-.handwriting {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.4rem;
-  line-height: 1.6;
-}
-
-.body-text {
-  font-size: 1.2rem;
-  color: #444;
-  margin: 15px 0;
-}
-
-.click-hint {
-  margin-top: 60px;
-  color: rgba(255, 255, 255, 0.7);
-  animation: blink 2s infinite;
+  height: 480px;
+  /* Grows tall */
+  z-index: 30;
+  /* Pops to very front */
+  transition-delay: 0.1s;
 }
 
 .btn-group {
@@ -398,41 +408,15 @@ p {
   background: #ff4d6d;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 8px 16px;
   border-radius: 30px;
   cursor: pointer;
   font-family: 'Courier New';
   font-weight: bold;
+}
 
-  /* Add this to your App.css */
-
-  .download-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    z-index: 10;
-  }
-
-  .download-btn:hover {
-    background: white;
-    transform: scale(1.1);
-  }
-
-  .download-btn:hover svg line,
-  .download-btn:hover svg path,
-  .download-btn:hover svg polyline {
-    stroke: black;
-    /* Turn icon black on hover */
-  }
+.click-hint {
+  margin-top: 60px;
+  color: rgba(255, 255, 255, 0.7);
+  animation: blink 2s infinite;
 }

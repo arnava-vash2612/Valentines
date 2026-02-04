@@ -3,18 +3,16 @@ import confetti from 'canvas-confetti';
 
 export default function Envelope() {
     const [isOpen, setIsOpen] = useState(false);
-    const [showTicket, setShowTicket] = useState(false); // State for the Boarding Pass
+    const [showTicket, setShowTicket] = useState(false);
 
     const handleOpen = () => {
         setIsOpen(true);
     };
 
-    // In src/components/Envelope.jsx
-
     const celebrate = (e) => {
         e.stopPropagation();
 
-        // FORCE Z-INDEX TO 9999
+        // Confetti on top of everything
         confetti({
             particleCount: 150,
             spread: 70,
@@ -22,10 +20,10 @@ export default function Envelope() {
             zIndex: 9999
         });
 
-        // Haptics & Ticket
         if (navigator.vibrate) navigator.vibrate([100, 100, 100]);
         setShowTicket(true);
     };
+
     return (
         <div className={`envelope-wrapper ${isOpen ? 'open' : ''}`} onClick={handleOpen}>
 
@@ -33,23 +31,20 @@ export default function Envelope() {
                 <div className="flap"></div>
                 <div className="pocket"></div>
 
-                {/* --- THE LETTER CONTENT --- */}
+                {/* --- THE LETTER --- */}
                 <div className="letter">
                     <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
 
-                        {/* Header */}
                         <p className="handwriting">My Dearest,</p>
 
-                        {/* Body Text */}
                         <p className="handwriting body-text">
-                            From the lonely circuits of UP to the psychology department of Christ, my mind always travels to you.
+                            From the lonly circuits of UP to the psychology department of Crhist, my mind always travels to you.
                             Distance is just a variable, but you are my forever constant.
                         </p>
 
-                        {/* The Question */}
                         <h3 className="handwriting" style={{ margin: '10px 0', fontSize: '1.2rem' }}>Will you be my Valentine?</h3>
 
-                        {/* Buttons (Hide them if ticket is shown to save space) */}
+                        {/* Buttons */}
                         {!showTicket && isOpen && (
                             <div className="btn-group">
                                 <button onClick={celebrate}>YES</button>
@@ -57,7 +52,7 @@ export default function Envelope() {
                             </div>
                         )}
 
-                        {/* --- THE BOARDING PASS (Appears after YES) --- */}
+                        {/* Boarding Pass (Appears after YES) */}
                         {showTicket && (
                             <div style={{
                                 marginTop: '10px',
