@@ -9,18 +9,24 @@ export default function Envelope() {
         setIsOpen(true);
     };
 
+    // In src/components/Envelope.jsx
+
     const celebrate = (e) => {
         e.stopPropagation();
 
-        // 1. Confetti Explosion
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        // Updated Confetti Config
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 },
+            zIndex: 9999, // <--- ADD THIS LINE to force it on top of everything
+        });
 
-        // 2. Haptic Heartbeat (Android only, but safe to include)
+        // Haptics
         if (navigator.vibrate) {
             navigator.vibrate([100, 100, 100, 800, 100, 100, 100, 800]);
         }
 
-        // 3. Show the Ticket after a delay
         setShowTicket(true);
     };
 
