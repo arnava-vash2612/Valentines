@@ -1,18 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Courier+New&family=Dancing+Script:wght@700&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Courier+New&display=swap');*/
 
 :root {
-  --bg-color: #0f0f12;
-  --eng-blue: #00d2ff;
-  --psych-pink: #ff4d6d;
-  --glass: rgba(255, 255, 255, 0.1);
+  --primary-pink: #ff758c;
+  --deep-red: #c71585;
+  --soft-cream: #fff0f3;
+  --glass: rgba(255, 255, 255, 0.25);
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--bg-color);
-  color: white;
-  font-family: 'Courier New', monospace;
+  /* Romantic Gradient Background */
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+  color: #592e39;
+  /* Dark warm brown text (easier to read) */
+  font-family: 'Playfair Display', serif;
+  /* Elegant font */
   overflow: hidden;
   height: 100vh;
   width: 100vw;
@@ -21,7 +24,7 @@ body {
   align-items: center;
 }
 
-/* --- 1. OPTIMIZED BACKGROUND (Nebula) --- */
+/* --- 1. FLOATING BACKGROUND HEARTS --- */
 .app-container {
   position: relative;
   width: 100%;
@@ -29,35 +32,30 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #000000 100%);
-  z-index: 1;
 }
 
+/* We reuse the "orb" divs but make them soft clouds/glows */
 .orb {
   position: absolute;
   border-radius: 50%;
-  /* Reduced blur for better performance */
-  filter: blur(60px);
-  opacity: 0.4;
+  filter: blur(80px);
+  opacity: 0.6;
   z-index: -1;
-  /* Hardware Acceleration */
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
-  animation: float 10s infinite ease-in-out;
+  animation: float 15s infinite ease-in-out;
 }
 
 .orb-1 {
-  width: 400px;
-  height: 400px;
-  background: var(--eng-blue);
+  width: 500px;
+  height: 500px;
+  background: white;
   top: -10%;
   left: -10%;
 }
 
 .orb-2 {
-  width: 500px;
-  height: 500px;
-  background: var(--psych-pink);
+  width: 400px;
+  height: 400px;
+  background: #ffc3a0;
   bottom: -10%;
   right: -10%;
   animation-delay: 2s;
@@ -67,15 +65,15 @@ body {
 
   0%,
   100% {
-    transform: translate(0, 0);
+    transform: translateY(0) scale(1);
   }
 
   50% {
-    transform: translate(30px, -30px);
+    transform: translateY(-40px) scale(1.1);
   }
 }
 
-/* --- 2. BIOMETRIC SCANNER (Opening Screen) --- */
+/* --- 2. HEARTBEAT SCANNER (Opening) --- */
 .scanner-container {
   display: flex;
   flex-direction: column;
@@ -85,203 +83,158 @@ body {
 }
 
 .fingerprint {
-  width: 120px;
-  height: 120px;
-  border: 2px solid rgba(0, 210, 255, 0.3);
+  width: 140px;
+  height: 140px;
+  /* Soft pink glowing circle */
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
   cursor: pointer;
-  background: rgba(0, 210, 255, 0.05);
+  box-shadow: 0 10px 30px rgba(199, 21, 133, 0.2);
   transition: all 0.3s;
-  animation: pulse-blue 2s infinite;
+  animation: heartbeat 1.5s infinite;
 }
 
 .fingerprint:hover {
-  background: rgba(0, 210, 255, 0.2);
   transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .fingerprint-icon {
-  font-size: 3.5rem;
-  background: linear-gradient(to bottom, #00d2ff 0%, #ffffff 50%, #00d2ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 100% 200%;
-  animation: scan 2s linear infinite;
+  font-size: 4rem;
+  /* Ensure this heart is visible */
+  color: #ff4d6d;
+  filter: drop-shadow(0 2px 10px rgba(255, 77, 109, 0.4));
 }
 
 .scan-text {
-  margin-top: 25px;
-  font-size: 0.9rem;
-  letter-spacing: 4px;
-  color: #00d2ff;
-  text-transform: uppercase;
-  animation: blink 1.5s infinite alternate;
+  margin-top: 30px;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  color: #c71585;
+  /* Deep Pink */
+  font-family: 'Dancing Script', cursive;
+  font-weight: bold;
 }
 
-@keyframes pulse-blue {
+@keyframes heartbeat {
   0% {
-    box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.4);
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 117, 140, 0.7);
   }
 
   70% {
-    box-shadow: 0 0 0 20px rgba(0, 210, 255, 0);
+    transform: scale(1.05);
+    box-shadow: 0 0 0 20px rgba(255, 117, 140, 0);
   }
 
   100% {
-    box-shadow: 0 0 0 0 rgba(0, 210, 255, 0);
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 117, 140, 0);
   }
 }
 
-@keyframes scan {
-  0% {
-    background-position: 0% 0%;
-  }
-
-  100% {
-    background-position: 0% 200%;
-  }
-}
-
-@keyframes blink {
-  from {
-    opacity: 0.5;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-/* --- 3. JOURNEY CARD (Cinema Mode) --- */
+/* --- 3. ELEGANT JOURNEY CARD --- */
 .journey-container {
   width: 90%;
-  max-width: 500px;
-  background: rgba(20, 20, 30, 0.6);
+  max-width: 480px;
+  background: rgba(255, 255, 255, 0.7);
+  /* White Glass */
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 25px;
+  padding: 35px;
   text-align: center;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 60px rgba(168, 85, 85, 0.15);
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
 }
 
-/* Image Frame Fixes */
 .frame {
   width: 100%;
   height: 350px;
   margin: 20px 0;
-  background: rgba(0, 0, 0, 0.5);
-  /* Dark background for letterboxing */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  background: white;
+  border-radius: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+  border: 5px solid white;
   position: relative;
+  overflow: hidden;
 }
 
 .frame img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* Prevents cropping */
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
-  transform: scale(0.95);
 }
 
+/* Floating Icon (Updated to look softer) */
 .floating-icon {
   position: absolute;
   bottom: 15px;
   right: 15px;
   font-size: 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(5px);
-  padding: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Download Button Style */
-.download-btn {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(5px);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  z-index: 10;
-}
-
-.download-btn:hover {
-  background: white;
-  transform: scale(1.1);
-}
-
-/* Text Styles */
 h1 {
-  font-size: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: #883e53;
   margin: 10px 0;
-  min-height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 p {
-  color: #a1a1aa;
-  font-size: 0.95rem;
-  margin-bottom: 20px;
+  color: #885566;
+  font-family: 'Courier New', monospace;
+  /* Keep Courier just for subtitles for contrast */
+  font-size: 0.9rem;
 }
 
 .tag {
-  display: inline-block;
-  padding: 5px 15px;
-  border: 1px solid currentColor;
+  background: #fff0f3;
+  color: #c71585 !important;
+  border: 1px solid #ffcad4 !important;
+  padding: 6px 16px;
   border-radius: 50px;
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.75rem;
+  font-weight: bold;
   letter-spacing: 1px;
-  margin-bottom: 10px;
 }
 
 .next-btn {
-  background: white;
-  color: black;
+  background: linear-gradient(to right, #ff758c, #ff7eb3);
+  color: white !important;
   border: none;
-  padding: 15px 40px;
+  padding: 16px 40px;
   border-radius: 50px;
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: bold;
+  letter-spacing: 2px;
+  box-shadow: 0 10px 20px rgba(255, 117, 140, 0.3);
   cursor: pointer;
   transition: transform 0.2s;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .next-btn:hover {
-  transform: scale(1.02);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 25px rgba(255, 117, 140, 0.4);
 }
 
-/* --- 4. ENVELOPE SYSTEM (The Corrected Version) --- */
-
+/* --- 4. ENVELOPE (Softened) --- */
 .envelope-wrapper {
   display: flex;
   justify-content: center;
@@ -294,129 +247,90 @@ p {
 
 .envelope {
   position: relative;
-  width: 300px;
-  height: 200px;
+  width: 320px;
+  height: 220px;
   background: #ff4d6d;
   border-radius: 0 0 10px 10px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 50px rgba(100, 0, 0, 0.2);
 }
 
-/* 1. THE FLAP (Top Triangle) - On TOP when closed */
 .flap {
   position: absolute;
   top: 0;
   left: 0;
   width: 0;
   height: 0;
-  border-left: 150px solid transparent;
-  border-right: 150px solid transparent;
-  border-top: 110px solid #e01e4a;
+  border-left: 160px solid transparent;
+  border-right: 160px solid transparent;
+  border-top: 120px solid #d90429;
+  /* Deep Red */
   transform-origin: top;
   transition: transform 0.6s ease-in-out;
   z-index: 20;
 }
 
-/* 2. THE POCKET (Bottom Triangle) */
 .pocket {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 0;
   height: 0;
-  border-left: 150px solid transparent;
-  border-right: 150px solid transparent;
-  border-bottom: 190px solid #ff758f;
+  border-left: 160px solid transparent;
+  border-right: 160px solid transparent;
+  border-bottom: 210px solid #ff758f;
+  /* Soft Red */
   z-index: 10;
   border-radius: 0 0 10px 10px;
 }
 
-/* 3. THE LETTER (Hidden inside initially) */
 .letter {
   position: absolute;
   bottom: 0;
   left: 10px;
-  width: 280px;
+  width: 300px;
   height: 180px;
   background: #fffdf7 !important;
-  /* Forces White Paper */
-  background-color: #fffdf7 !important;
   z-index: 5;
-  /* Hidden behind flap */
   transition: all 1s ease-in-out;
-  padding: 20px;
+  padding: 25px;
   box-sizing: border-box;
   text-align: center;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  /* Allow scrolling */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Hide scrollbar */
 .letter::-webkit-scrollbar {
   display: none;
 }
 
-.letter {
-  scrollbar-width: none;
-}
-
-/* Letter Text Styles */
 .letter p,
 .letter h1,
-.letter h2,
-.letter h3,
-.letter span {
-  color: #333 !important;
-  /* Force Dark Grey Text */
+.letter h3 {
+  color: #592e39 !important;
   font-family: 'Dancing Script', cursive !important;
-  text-shadow: none !important;
 }
 
-.letter .ticket-body,
-.letter .ticket-header {
-  font-family: 'Courier New', monospace !important;
-}
-
-/* --- OPEN STATE ANIMATIONS --- */
-
+/* Open State */
 .envelope-wrapper.open .flap {
   transform: rotateX(180deg);
   z-index: 1;
-  /* Drops to back */
 }
 
 .envelope-wrapper.open .letter {
-  bottom: 50px;
-  height: 480px;
-  /* Grows tall */
+  bottom: 60px;
+  height: 500px;
   z-index: 30;
-  /* Pops to very front */
-  transition-delay: 0.1s;
-}
-
-.btn-group {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin-top: 15px;
 }
 
 .btn-group button {
   background: #ff4d6d;
   color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 10px 20px;
   border-radius: 30px;
   cursor: pointer;
   font-family: 'Courier New';
-  font-weight: bold;
-}
-
-.click-hint {
-  margin-top: 60px;
-  color: rgba(255, 255, 255, 0.7);
-  animation: blink 2s infinite;
 }
