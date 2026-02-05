@@ -333,4 +333,47 @@ p {
   border-radius: 30px;
   cursor: pointer;
   font-family: 'Courier New';
+
+  /* --- RESTORED DOWNLOAD BUTTON (Romantic Style) --- */
+  .download-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    /* Soft Glass Effect */
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(199, 21, 133, 0.15);
+    /* Soft pink shadow */
+  }
+
+  /* Hover Effect: Turns Pink */
+  .download-btn:hover {
+    background: #ff4d6d;
+    transform: scale(1.1) rotate(5deg);
+    /* Cute little tilt */
+    border-color: #ff4d6d;
+    box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
+  }
+
+  /* Icon Colors */
+  .download-btn svg {
+    stroke: #c71585;
+    /* Deep Pink Icon initially */
+    transition: stroke 0.3s;
+  }
+
+  .download-btn:hover svg {
+    stroke: white;
+    /* Turns White on hover */
+  }
 }
